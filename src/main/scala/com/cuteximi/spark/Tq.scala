@@ -1,12 +1,10 @@
 package com.cuteximi.spark
 
-import org.apache.spark.{ Partitioner, SparkConf, SparkContext}
+import org.apache.spark.{  SparkConf, SparkContext}
 
 /**
   *
-  * 天气
-  *
-  * 模拟的数据，只给了每一天的最高温度
+  * 统计天气
   *
   * 1949-10-01 14:21:02 34c
   * 1949-10-01 19:21:02 38c
@@ -19,6 +17,9 @@ import org.apache.spark.{ Partitioner, SparkConf, SparkContext}
   * 1951-07-01 12:21:02 45c
   * 1951-07-02 12:21:02 46c
   * 1951-07-03 12:21:03 47c
+  *
+  * 虽然可以一行代码搞定，但那样可读性太差了。
+  *
   */
 object Tq {
 
@@ -33,12 +34,15 @@ object Tq {
 
     // 按天分组，取一天的最高温度
 
-    val rdd2 = rdd1.map(_.split(" ")).map(x=>(x(0),x(2))).groupByKey().map(x=>{(x._1,x._2.toList.sortWith( _ > _).take(1)(0))})
+    val rdd2 = rdd1.map(_.split(" ")).map(x=>(x(0),x(2))).groupByKey().map(x=>{(x._1,x._2.toList.sortWith( _ > _).take(1)(0))}).cache()
+
 
     rdd2.collect()
 
     // 按月分组
     // map - map - groupByKey - map - sort - print
+
+    val rdd3 = rdd2.map(x=>{(x._1.substring(0,7),x._2+"-"+x._1.split("-")(2))}).groupByKey().map(x=>{(x._1,x._2.toList.sortWith(_ > _).take(2))}).foreach(println)
 
     //rdd2.map(x=>{(x(0).substring(0,7),x(1)+"-"+x(0).split("-")(2))}).groupByKey().map(x=>{(x._1,x._2.toList.sortWith(_ > _).take(2))}).foreach(x=>println(x._1.toString+"温度最高的两天是"+x._2(0).split("-")(1)+"和"+x._2(1).split("-")(1)))
 
