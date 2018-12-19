@@ -1,0 +1,44 @@
+spark 78
+sql 98
+java 80
+javascript 98
+scala 69
+hadoop 87
+hbase 97
+hive 86
+
+spark 89
+sql 65
+java 45
+javascript 76
+scala 34
+hadoop 87
+hbase 43
+hive 76
+
+spark 65
+sql 53
+java 65
+javascript 54
+scala 98
+hadoop 32
+hbase 76
+hive 87
+
+spark 38
+sql 42
+java 97
+javascript 34
+scala 76
+hadoop 90
+hbase 55
+hive 88
+
+spark 35
+sql 76
+java 98
+javascript 34
+scala 65
+hadoop 76
+hbase 67
+hive 56
