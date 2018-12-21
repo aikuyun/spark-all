@@ -1,9 +1,10 @@
 package com.cuteximi.spark
 
-import com.cuteximi.spark.bean.Weather
-import org.apache.spark.rdd.RDD
-import org.apache.spark.sql.SQLContext
+import org.apache.spark.sql.{Row, SQLContext}
+import org.apache.spark.sql.types.{StringType, StructField, StructType}
 import org.apache.spark.{SparkConf, SparkContext}
+
+import java.util
 
 /**
   *
@@ -28,29 +29,14 @@ object Tq {
 
 
   def main(args: Array[String]): Unit = {
+
     // 配置
     val conf = new SparkConf().setAppName("wordCount").setMaster("local[1]")
     val sc = new SparkContext(conf)
 
-    RDD
-
     // 数据
     val rdd1 = sc.textFile("src/main/resources/tq.txt")
 
-    val result = rdd1.map(x=>{
-      val list = x.split("")
-      val date = list(0)
-      val time = list(1)
-      val wenDu = list(2)
-      val listDate = date.split("-")
-
-      val weather = new Weather();
-      weather.setYear(listDate(0))
-      weather.setMonth(listDate(1))
-      weather.setDay(listDate(2))
-      weather.setTime(time)
-      weather.setWenDu(wenDu)
-    })
     
 
     // 按天分组，取一天的最高温度
@@ -71,11 +57,23 @@ object Tq {
     // 获取sqlContext
     val sqlContext = new SQLContext(sc)
 
-    val text= sqlContext.read.text("src/main/resources/tq.txt")
 
-    //val text1= sqlContext.read.format()
+    val schemaString = "date time wendu"
 
-    text.show()
+
+    val schema = StructType(schemaString.split(" ").map(fieldName => StructField(fieldName,StringType,true)))
+
+    val rowRdd = rdd1.map(_.split(" ")).map(p => Row(p(0),p(1),p(2).trim))
+
+    rowRdd.foreach(println)
+
+    val personDataFrame = sqlContext.createDataFrame(rowRdd,schema)
+
+    personDataFrame.registerTempTable("person")
+
+    val results = sqlContext.sql("select date ,wendu from (SELECT *, row_number() over(partition by date order by wendu desc) rank FROM person ) tmp WHERE rank <= 1")
+
+    results.show()
   }
 
 }
