@@ -1,6 +1,6 @@
-# spark study
+# Spark 
 
-spark 代码练习，结合官网实例和项目的例子。
+spark 代码练习S，结合官网实例和项目的例子。
 
 ## SparkStreaming 
 
