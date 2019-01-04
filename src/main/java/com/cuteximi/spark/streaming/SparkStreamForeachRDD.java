@@ -1,4 +1,4 @@
-package com.cuteximi.spark;
+package com.cuteximi.spark.streaming;
 
 import org.apache.spark.SparkConf;
 import org.apache.spark.api.java.JavaPairRDD;
