@@ -4,4 +4,4 @@
 
 线性回归图解，什么是线性回归，原理是什么？什么是梯度下降算法。
 
-![]()
+![](https://github.com/aikuyun/spark-all/blob/master/src/image/%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92.png)
