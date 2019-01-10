@@ -1,9 +1,8 @@
 package com.cuteximi.spark.mllib.lr
 
 import org.apache.log4j.{Level, Logger}
-import org.apache.spark.mllib.linalg
 import org.apache.spark.mllib.linalg.Vectors
-import org.apache.spark.mllib.regression.{LabeledPoint, LinearRegressionModel,LinearRegressionWithSGD}
+import org.apache.spark.mllib.regression.{LabeledPoint, LinearRegressionWithSGD}
 import org.apache.spark.rdd.RDD
 import org.apache.spark.{SparkConf, SparkContext}
 
