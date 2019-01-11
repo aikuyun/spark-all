@@ -19,9 +19,9 @@ object LogisticRegression03 {
     val sc = new SparkContext(conf)
     // 解决线性不可分我们来升维,升维有代价,计算复杂度变大了
     val inputData = MLUtils.loadLibSVMFile(sc, "src/main/resources/healthStatus03.txt")
-      .map { labelpoint =>
-        val label = labelpoint.label
-        val feature = labelpoint.features
+      .map { labelPoint =>
+        val label = labelPoint.label
+        val feature = labelPoint.features
         val array = Array(feature(0), feature(1), feature(0) * feature(1))
         val convertFeature = Vectors.dense(array)
         new LabeledPoint(label, convertFeature)
