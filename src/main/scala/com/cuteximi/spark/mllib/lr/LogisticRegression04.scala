@@ -8,6 +8,7 @@ import org.apache.spark.{SparkConf, SparkContext}
 
 object LogisticRegression04 {
 
+  // com.cuteximi.spark.mllib.lr.LogisticRegression04
   def main(args: Array[String]) {
 
     if(args.length!=2){

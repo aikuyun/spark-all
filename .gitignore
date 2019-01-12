@@ -12,3 +12,4 @@ gradlew
 gradlew.bat
 settings.gradle
 /pom.xml
+src/main/scala/com/cuteximi/spark/mllib/nb/
