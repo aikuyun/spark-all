@@ -6,7 +6,6 @@
 src/test/
 /.gradle/
 .gradle/
-build.gradle
 build/
 gradle/
 gradlew
