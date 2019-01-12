@@ -4,3 +4,11 @@
 /target/
 /sparktest2.iml
 src/test/
+/.gradle/
+.gradle/
+build.gradle
+build/
+gradle/
+gradlew
+gradlew.bat
+settings.gradle
